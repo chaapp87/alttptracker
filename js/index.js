@@ -123,7 +123,8 @@ function launch_tracker() {
 	var sphere = document.querySelector('input[name="spheregroup"]:checked').value;
 	var color = document.querySelector('input[name="alternatecolorgroup"]:checked').value;
 	var autotracking = document.querySelector('input[name="autotrackinggroup"]:checked').value;
-	var trackingport = document.getElementById('autotrackingport').value;
+        var trackingport = document.getElementById('autotrackingport').value;
+    	var trackinghost = document.getElementById('autotrackinghost').value;
 	var restreamingcode = document.getElementById('restreamingcode').value;
 	var restreamer = document.querySelector('input[name="restreamgroup"]:checked').value;
 	var restreamdelay = document.getElementById('restreamingdelay').value;
@@ -165,7 +166,7 @@ function launch_tracker() {
 		glitches = 'M';
 	}
 	
-	var trackerWindow = window.open('tracker.html?f={world}{entrance}{door}{overworld}{boss}{enemy}{unknown}{glitches}{shuffledmaps}{shuffledcompasses}{shuffledsmallkeys}{shuffledbigkeys}{shopsanity}{ambrosia}{nonprogressivebows}{activatedflute}{goal}{tower}{towercrystals}{ganon}{ganoncrystals}{swords}&d={map}{spoiler}{sphere}{color}{restreamingcode}{restreamer}{restreamdelay}&a={autotracking}{trackingport}&s={startingitemstring}&p={sprite}&r={epoch}'
+    var trackerWindow = window.open('tracker.html?f={world}{entrance}{door}{overworld}{boss}{enemy}{unknown}{glitches}{shuffledmaps}{shuffledcompasses}{shuffledsmallkeys}{shuffledbigkeys}{shopsanity}{ambrosia}{nonprogressivebows}{activatedflute}{goal}{tower}{towercrystals}{ganon}{ganoncrystals}{swords}&d={map}{spoiler}{sphere}{color}{restreamingcode}{restreamer}{restreamdelay}&a={autotracking}{trackingport}{trackinghost}&s={startingitemstring}&p={sprite}&r={epoch}'
 			.replace('{world}', world)
 			.replace('{entrance}', entrance)
 			.replace('{door}', door)
@@ -193,7 +194,8 @@ function launch_tracker() {
 			.replace('{sphere}', sphere)
 			.replace('{color}', color)
 			.replace('{autotracking}', autotracking)
-			.replace('{trackingport}', trackingport)
+  			.replace('{trackingport}', trackingport)
+		    	.replace('{trackinghost}', trackinghost)
 			.replace('{restreamingcode}', restreamingcode)
 			.replace('{restreamer}', restreamer)
 			.replace('{restreamdelay}', restreamdelay)
