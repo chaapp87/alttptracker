@@ -31,10 +31,22 @@ function load_cookie() {
 			if (sprite.indexOf(';') > -1) {
 				sprite = sprite.substr(0, sprite.indexOf(';'));
 			}
+
+		    	if (sprite.indexOf('|') > -1) {
+				sprite = sprite.substr(0, sprite.indexOf('|'));
+			}
 			document.getElementById("spriteselect").value = sprite;
 		}
 		if (c.indexOf('c-Y') > -1) {
 			document.getElementById("alternatecoloryes").checked = true;
+		}
+
+	    if (c.indexOf('h-') > -1) {
+			var host = c.substr(c.indexOf('h-') + 2);
+			if (host.indexOf(';') > -1) {
+				host = host.substr(0, host.indexOf(';'));
+			}
+			document.getElementById("autotrackinghost").value = host;
 		}
 	}
 }
@@ -122,9 +134,9 @@ function launch_tracker() {
 	var spoiler = document.querySelector('input[name="spoilergroup"]:checked').value;
 	var sphere = document.querySelector('input[name="spheregroup"]:checked').value;
 	var color = document.querySelector('input[name="alternatecolorgroup"]:checked').value;
-	var autotracking = document.querySelector('input[name="autotrackinggroup"]:checked').value;
+        var autotracking = document.querySelector('input[name="autotrackinggroup"]:checked').value;
+        var trackinghost = document.getElementById('autotrackinghost').value;
         var trackingport = document.getElementById('autotrackingport').value;
-    	var trackinghost = document.getElementById('autotrackinghost').value;
 	var restreamingcode = document.getElementById('restreamingcode').value;
 	var restreamer = document.querySelector('input[name="restreamgroup"]:checked').value;
 	var restreamdelay = document.getElementById('restreamingdelay').value;
@@ -150,7 +162,7 @@ function launch_tracker() {
 	var height = sphere === "Y" ? map === "C" ? 988 : 744 : map === "C" ? 692 : map === "V" ? 1330 : 448;
 	
 	if (document.getElementById("remembersettings").checked == true) {
-		var settings = "m-" + map + "|s-" + sphere + "|a-" + autotracking + trackingport + "|c-" + color + "|p-" + sprite;
+		var settings = "m-" + map + "|s-" + sphere + "|a-" + autotracking + trackingport + "|c-" + color + "|p-" + sprite + "|h-" + trackinghost;
 		document.cookie = "settings=" + settings + "; expires=Sat, 3 Jan 2026 12:00:00 UTC";
 	} else {
 		document.cookie = "settings=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
@@ -166,7 +178,7 @@ function launch_tracker() {
 		glitches = 'M';
 	}
 	
-    var trackerWindow = window.open('tracker.html?f={world}{entrance}{door}{overworld}{boss}{enemy}{unknown}{glitches}{shuffledmaps}{shuffledcompasses}{shuffledsmallkeys}{shuffledbigkeys}{shopsanity}{ambrosia}{nonprogressivebows}{activatedflute}{goal}{tower}{towercrystals}{ganon}{ganoncrystals}{swords}&d={map}{spoiler}{sphere}{color}{restreamingcode}{restreamer}{restreamdelay}&a={autotracking}{trackingport}{trackinghost}&s={startingitemstring}&p={sprite}&r={epoch}'
+    var trackerWindow = window.open('tracker.html?f={world}{entrance}{door}{overworld}{boss}{enemy}{unknown}{glitches}{shuffledmaps}{shuffledcompasses}{shuffledsmallkeys}{shuffledbigkeys}{shopsanity}{ambrosia}{nonprogressivebows}{activatedflute}{goal}{tower}{towercrystals}{ganon}{ganoncrystals}{swords}&d={map}{spoiler}{sphere}{color}{restreamingcode}{restreamer}{restreamdelay}&a={autotracking}{trackingport}&s={startingitemstring}&p={sprite}&r={epoch}&h={trackinghost}'
 			.replace('{world}', world)
 			.replace('{entrance}', entrance)
 			.replace('{door}', door)
@@ -194,8 +206,8 @@ function launch_tracker() {
 			.replace('{sphere}', sphere)
 			.replace('{color}', color)
 			.replace('{autotracking}', autotracking)
+    		    	.replace('{trackinghost}', trackinghost)
   			.replace('{trackingport}', trackingport)
-		    	.replace('{trackinghost}', trackinghost)
 			.replace('{restreamingcode}', restreamingcode)
 			.replace('{restreamer}', restreamer)
 			.replace('{restreamdelay}', restreamdelay)
